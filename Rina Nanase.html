@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ดูหนัง</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0b0b0b;
+    color: white;
+}
+
+/* HEADER */
+.header {
+    padding: 16px 30px;
+    background: black;
+    border-bottom: 1px solid #222;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+}
+
+.header h1 {
+    font-size: 20px;
+}
+
+/* PLAYER */
+.player-wrap {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.player {
+    aspect-ratio: 16 / 9;
+    background: black;
+}
+
+.player iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* IMAGE UNDER VIDEO (ROW) */
+.under-image {
+    margin-top: 16px;
+    display: flex;
+    gap: 14px;
+    max-width: 100%;
+}
+
+.under-image img {
+    width: 475px;
+    border-radius: 10px;
+    border: 1px solid #222;
+    box-shadow: 0 10px 30px rgba(0,0,0,.6);
+}
+
+/* CONTROLS */
+.controls {
+    margin-top: 15px;
+}
+
+.controls button {
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.controls button:hover {
+    background: #222;
+}
+
+/* SERVER */
+.servers {
+    margin-top: 15px;
+}
+
+.servers span {
+    margin-right: 8px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.servers button {
+    background: #111;
+    color: #ccc;
+    border: 1px solid #333;
+    padding: 6px 12px;
+    margin-right: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.servers button.active,
+.servers button:hover {
+    background: white;
+    color: black;
+}
+
+/* THEATER MODE */
+.theater body {
+    overflow: hidden;
+}
+
+.theater .header {
+    display: none;
+}
+
+.theater .player-wrap {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.theater .player {
+    height: 100vh;
+    aspect-ratio: auto;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .under-image {
+        flex-direction: column;
+    }
+
+    .under-image img {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <a href="index.html">
+        <h1>🎬 Jav 4 (HD)</h1>
+    </a>
+</div>
+
+<!-- ===== CLIP 1 ===== -->
+<div class="player-wrap">
+
+    <div class="player">
+        <iframe id="video1"
+        src="https://mega.nz/embed/53ZFnKjZ#rX_RohPl-gfWcneS23Wl54Xn-H0R-ctCkCxsDUDiszc"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- IMAGE AFTER VIDEO -->
+    <div class="under-image">
+        <img src="Rina Nanase/RNP1.jpg" alt="Poster">
+        <img src="Rina Nanase/RNP2.webp" alt="Poster">
+    </div>
+
+    <div class="controls">
+        <button onclick="toggleTheater()">🌑 โหมดโรงหนัง</button>
+    </div>
+
+    <div class="servers">
+        <span>คลิป 1 :</span>
+        <button class="active" onclick="changeServer('video1', this,
+        'https://mega.nz/embed/53ZFnKjZ#rX_RohPl-gfWcneS23Wl54Xn-H0R-ctCkCxsDUDiszc')">
+        Server 1
+        </button>
+
+        <button onclick="changeServer('video1', this,
+        'https://mega.nz/embed/XXXXXXXX#YYYYYYYY')">
+        Server 2
+        </button>
+    </div>
+</div>
+
+<!-- ===== CLIP 2 ===== -->
+<div class="player-wrap">
+    <div class="player">
+        <iframe id="video2"
+        src="https://mega.nz/embed/NjRgzAaI#M6O57zoMaCNWlvoHALqqRhdkh3AWdxLlIPut0SY0NSs"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- IMAGE AFTER VIDEO -->
+    <div class="under-image">
+        <img src="Rina Nanase/RNP3.webp" alt="Poster">
+        <img src="Rina Nanase/RNP4.jpg" alt="Poster">
+    </div>
+
+    <div class="controls">
+        <button onclick="toggleTheater()">🌑 โหมดโรงหนัง</button>
+    </div>
+
+    <div class="servers">
+        <span>คลิป 2 :</span>
+        <button class="active" onclick="changeServer('video2', this,
+        'https://mega.nz/embed/NjRgzAaI#M6O57zoMaCNWlvoHALqqRhdkh3AWdxLlIPut0SY0NSs')">
+        Server 1
+        </button>
+
+        <button onclick="changeServer('video2', this,
+        'https://mega.nz/embed/XXXXXXXX#YYYYYYYY')">
+        Server 2
+        </button>
+    </div>
+</div>
+
+<script>
+function toggleTheater() {
+    document.documentElement.classList.toggle("theater");
+}
+
+function changeServer(videoId, btn, url) {
+    document.getElementById(videoId).src = url;
+
+    btn.parentElement.querySelectorAll("button")
+        .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+}
+</script>
+
+</body>
+</html>

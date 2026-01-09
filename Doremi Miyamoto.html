@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ดูหนัง</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0b0b0b;
+    color: white;
+}
+
+/* HEADER */
+.header {
+    padding: 16px 30px;
+    background: black;
+    border-bottom: 1px solid #222;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+}
+
+.header a:hover {
+    opacity: 0.8;
+}
+
+.header h1 {
+    font-size: 20px;
+}
+
+/* PLAYER */
+.player-wrap {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.player {
+    aspect-ratio: 16 / 9;
+    background: black;
+}
+
+.player iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* CONTROLS */
+.controls {
+    margin-top: 15px;
+}
+
+.controls button {
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.controls button:hover {
+    background: #222;
+}
+
+/* SERVER */
+.servers {
+    margin-top: 15px;
+}
+
+.servers span {
+    margin-right: 8px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.servers button {
+    background: #111;
+    color: #ccc;
+    border: 1px solid #333;
+    padding: 6px 12px;
+    margin-right: 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.servers button.active,
+.servers button:hover {
+    background: white;
+    color: black;
+}
+
+/* THEATER MODE */
+.theater body {
+    overflow: hidden;
+}
+
+.theater .header {
+    display: none;
+}
+
+.theater .player-wrap {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.theater .player {
+    height: 100vh;
+    aspect-ratio: auto;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER (กลับหน้าหลัก) -->
+<div class="header">
+    <a href="index.html">
+        <h1>🎬 Jav 4 (HD)</h1>
+    </a>
+</div>
+
+<!-- ===== CLIP 1 ===== -->
+<div class="player-wrap">
+    <div class="player">
+        <iframe id="video1"
+        src="https://mega.nz/embed/9yJjxDKb#IJln8EC6qGJeR5z6eYwe7ehs98UQBh6zl1-6xgGh7Z4"
+        allowfullscreen></iframe>
+    </div>
+
+    <div class="controls">
+        <button onclick="toggleTheater()">🌑 โหมดโรงหนัง</button>
+    </div>
+
+    <div class="servers">
+        <span>คลิป 1 :</span>
+        <button class="active" onclick="changeServer('video1', this,
+        'https://mega.nz/embed/9yJjxDKb#IJln8EC6qGJeR5z6eYwe7ehs98UQBh6zl1-6xgGh7Z4')">
+        Server 1
+        </button>
+
+        <button onclick="changeServer('video1', this,
+        'https://mega.nz/embed/XXXXXXXX#YYYYYYYY')">
+        Server 2
+        </button>
+    </div>
+</div>
+
+<!-- ===== CLIP 2 ===== -->
+<div class="player-wrap">
+    <div class="player">
+        <iframe id="video2"
+        src="https://mega.nz/embed/Ev4UQATS#y5VfcViJrKttHlljSyUwu67b3Cn1szMNcyzAECDiI5E"
+        allowfullscreen></iframe>
+    </div>
+
+    <div class="controls">
+        <button onclick="toggleTheater()">🌑 โหมดโรงหนัง</button>
+    </div>
+
+    <div class="servers">
+        <span>คลิป 2 :</span>
+        <button class="active" onclick="changeServer('video2', this,
+        'https://mega.nz/embed/Ev4UQATS#y5VfcViJrKttHlljSyUwu67b3Cn1szMNcyzAECDiI5E')">
+        Server 1
+        </button>
+
+        <button onclick="changeServer('video2', this,
+        'https://mega.nz/embed/XXXXXXXX#YYYYYYYY')">
+        Server 2
+        </button>
+    </div>
+</div>
+
+<script>
+function toggleTheater() {
+    document.documentElement.classList.toggle("theater");
+}
+
+function changeServer(videoId, btn, url) {
+    document.getElementById(videoId).src = url;
+
+    btn.parentElement.querySelectorAll("button")
+        .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+}
+</script>
+
+</body>
+</html>
